@@ -28,35 +28,35 @@ Crypto wallet from quest.
  //TODO: не заполнено.  
  
 
-## Используемые библиотке и плагины
-flutter_hooks: ^0.18.0
-hooks_riverpod: ^2.3.4
-get: ^4.6.5
-shimmer: ^2.0.0
-auto_route: ^6.3.0
-hive: ^2.2.3
-drift: ^2.7.0
-dio: ^5.1.1
+## Используемые библиотке и плагины  
+flutter_hooks: ^0.18.0  
+hooks_riverpod: ^2.3.4  
+get: ^4.6.5  
+shimmer: ^2.0.0  
+auto_route: ^6.3.0  
+hive: ^2.2.3  
+drift: ^2.7.0  
+dio: ^5.1.1  
 
 
-## Другое (способоности языка и фраемворка и т.д.)
+## Другое (способоности языка и фраемворка и т.д.)  
 
-- Meta and annotations
-- Cascades Dart
-- Basic OOP (extends, implements, static)
-- Encapsulation, Polymorphism, Inheritance, Abstraction
-- Immutability, side effects
-- Differentiate between ephemeral state and app state
-- Code Style
-- linter
-- 
+- Meta and annotations  
+- Cascades Dart  
+- Basic OOP (extends, implements, static)  
+- Encapsulation, Polymorphism, Inheritance, Abstraction  
+- Immutability, side effects   
+- Differentiate between ephemeral state and app state  
+- Code Style  
+- linter  
+-  
 
 
 ## !! План  
 
--[ ] Отрисовка экранов первых: экран загрухки, экран авторизации, главный экран
--[ ] Создание основы: Навигации, Менеджера состояния, базы данных и т. д.
--[ ] Написание авторизаци
--[ ] Диалоговое окно об ошибке
+-[ ] Отрисовка экранов первых: экран загрухки, экран авторизации, главный экран  
+-[ ] Создание основы: Навигации, Менеджера состояния, базы данных и т. д.  
+-[ ] Написание авторизаци  
+-[ ] Диалоговое окно об ошибке  
  
  
