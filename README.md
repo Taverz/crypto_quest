@@ -37,101 +37,100 @@ auto_route: ^6.3.0
 hive: ^2.2.3  
 drift: ^2.7.0  
 dio: ^5.1.1  
-fvm: ^2.4.1 - Flutter Version Management
-Provider
-GetX
-Equatable
-Mockito
-mocktail
-Faker
-Goal
-git
-Flutter Secure Storage (hive, qripto-)
-LocalStorage
-i18n
-Image Test Utilities
-Network Image Mock
+fvm: ^2.4.1 - Flutter Version Management  
+Provider  
+GetX  
+Equatable  
+Mockito  
+mocktail  
+Faker 
+Goal  
+git  
+Flutter Secure Storage (hive, qripto-)  
+LocalStorage  
+i18n  
+Image Test Utilities  
+Network Image Mock 
 
 ## Другое (способоности языка и фраемворка и т.д.)  
-
 - Meta and annotations  
 - Cascades Dart  
 - Basic OOP (extends, implements, static)  
 - Encapsulation, Polymorphism, Inheritance, Abstraction  
 - Immutability, side effects   
 - Differentiate between ephemeral state and app state  
-- Code Style  
-- linter  
-- Zero Safety
-- Classes
-- Abstract Classes
-- Functions
-- Constants
-- mixins
-- Extensions
-- enums
-- Exceptions
-- futures
-- streams
-- Constructors
-- Async/Await
-- Stateless Widgets
-- Stateful Widgets
-- Material Theme
-- Assets
-- app icon
+- Code Style    
+- linter    
+- Zero Safety  
+- Classes  
+- Abstract Classes  
+- Functions  
+- Constants  
+- mixins  
+- Extensions 
+- enums  
+- Exceptions  
+- futures  
+- streams  
+- Constructors  
+- Async/Await  
+- Stateless Widgets  
+- Stateful Widgets  
+- Material Theme  
+- Assets  
+- app icon  
 
 
 
-## Principles
-Single Responsibility Principle (SRP)
-Open Closed Principle (OCP)
-Liskov Substitution Principle (LSP)
-Interface Segregation Principle (ISP)
-Dependency Inversion Principle (DIP)
-Separation of Concerns (SOC)
-Don't Repeat Yourself (DRY)
-You Aren't Gonna Need It (YAGNI)
-Keep It Simple, Silly (KISS)
-Command Query Responsibility Segregation (CQRS)
-Composition Over Inheritance
-Small Commits
+## Principles  
+Single Responsibility Principle (SRP)  
+Open Closed Principle (OCP)  
+Liskov Substitution Principle (LSP)  
+Interface Segregation Principle (ISP)   
+Dependency Inversion Principle (DIP)  
+Separation of Concerns (SOC)  
+Don't Repeat Yourself (DRY)  
+You Aren't Gonna Need It (YAGNI)  
+Keep It Simple, Silly (KISS)  
+Command Query Responsibility Segregation (CQRS)  
+Composition Over Inheritance  
+Small Commits  
 
-## Design Patterns
-factory
-adapter
-Composite
-decorator
-Dependency Injection
-Abstract Server
-Composition Root
-Builder
-singleton
-Observer
-Strategy
-AAA (Arrange, Act, Assert)
+## Design Patterns  
+factory  
+adapter  
+Composite  
+decorator  
+Dependency Injection  
+Abstract Server  
+Composition Root  
+Builder  
+singleton  
+Observer  
+Strategy  
+AAA (Arrange, Act, Assert)  
 
-## Methodologies and Designs
-TDD
-BDD
-Clean Architecture
-Reactive Programming
-GitFlow
-modular design
-Dependency Diagrams
-Use Cases
+## Methodologies and Designs  
+TDD  
+BDD  
+Clean Architecture  
+Reactive Programming  
+GitFlow  
+modular design  
+Dependency Diagrams  
+Use Cases  
 
 
-## Test Features
-Unitary tests
-Widget Tests
-Stream Tests
-Integration Tests
-Test Coverage
-Test Doubles
-Mocks
-stubs
-spies
+## Test Features  
+Unitary tests  
+Widget Tests  
+Stream Tests  
+Integration Tests  
+Test Coverage  
+Test Doubles  
+Mocks  
+stubs  
+spies  
 
 
 ## !! План  
