@@ -37,8 +37,7 @@ auto_route: ^6.3.0
 hive: ^2.2.3  
 drift: ^2.7.0  
 dio: ^5.1.1  
-Flutter Version Management
-Http
+fvm: ^2.4.1 - Flutter Version Management
 Provider
 GetX
 Equatable
@@ -47,7 +46,7 @@ mocktail
 Faker
 Goal
 git
-Flutter Secure Storage
+Flutter Secure Storage (hive, qripto-)
 LocalStorage
 i18n
 Image Test Utilities
