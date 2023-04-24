@@ -33,7 +33,8 @@ flutter_hooks: ^0.18.0
 hooks_riverpod: ^2.3.4  
 get: ^4.6.5  
 shimmer: ^2.0.0  
-auto_route: ^6.3.0  
+<!-- auto_route: ^6.3.0   -->
+go_router: ^6.5.7
 hive: ^2.2.3  
 drift: ^2.7.0  
 dio: ^5.1.1  
@@ -79,6 +80,7 @@ Network Image Mock
 - Material Theme  
 - Assets  
 - app icon  
+- Flutter hooks
 
 
 
