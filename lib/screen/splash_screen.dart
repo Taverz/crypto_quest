@@ -11,7 +11,7 @@ final providerSplashScreen = Provider((ref) => SplashScreenProvider());
 class SplashScreenProvider {
 
   Future<void> startDelayed() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
   }
   Future<void> loaded(Function(bool) endDalayedSuccess) async {
     await startDelayed();
@@ -24,6 +24,7 @@ class SplashScreen extends HookConsumerWidget  {
   Widget build(BuildContext context, WidgetRef ref) {
     final SplashScreenProvider  watchVal = ref.watch(providerSplashScreen);
     watchVal.loaded((successLoad){
+      if(successLoad)
       context.go('/login_page');
     });
     return Scaffold(

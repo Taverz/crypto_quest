@@ -28,6 +28,7 @@ dependencies:
   hive: ^2.2.3
   drift: ^2.7.0
   dio: ^5.1.1
+  connectivity_plus: ^3.0.2
 
 dev_dependencies:
   flutter_test:

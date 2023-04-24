@@ -5,13 +5,15 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../service/nertwork_service.dart';
+
 final loginPageProv = Provider((ref) => LoginPageProvider());
 
 class LoginPageProvider  {
   String? login;
   String? password;
   auth(){
-    //TODOD: validation
+    //TODO: validation
     
   }
 }
@@ -20,6 +22,7 @@ class LoginPageW extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var sizeV =const SizedBox(height: 15,);
+    listenerConnectSnackbar(context, ref);
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
