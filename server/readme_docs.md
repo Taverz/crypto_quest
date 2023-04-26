@@ -23,6 +23,7 @@ All setup. You are ready to rock!
 Start your Serverpod by running:
 
   $ cd .\rrr\rrr_server\
+  // ckeck deleted line table:example or commment
   $ .\setup-tables.cmd // not created the first time
   $ .\setup-tables.cmd //  CREATE INDEX CREATE TABLE - means the table has been created
   $ docker compose up --build --detach  // something like start with reboot
