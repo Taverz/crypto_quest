@@ -56,7 +56,11 @@ dependencies:
   ## other dependencies here
   # inject:
   #   path: ./vendor/inject.dart/package/inject
+
+  ## Huawei service
   agconnect_auth: ^1.6.0+300
+  # agconnect_core: ^1.6.0+300
+  huawei_push: ^6.7.0+300
 
 dev_dependencies:
   flutter_test:

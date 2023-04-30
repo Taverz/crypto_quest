@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../screen/login_page.dart';
 import '../screen/home_main_page.dart';
+import '../screen/registration_page.dart';
 import '../screen/splash_screen.dart';
 
 class AppRoutes {
@@ -21,6 +22,13 @@ class AppRoutes {
     },
   );
 
+  static final registrationPage =  GoRoute(
+    path: AppRoutesConst.REGISTRATION,
+    builder: (BuildContext context, GoRouterState state) {
+      return RegistrationPageW();
+    },
+  );
+
   static final GoRouter routerSettigs = GoRouter(
   routes: <RouteBase>[
     GoRoute(
@@ -31,6 +39,7 @@ class AppRoutes {
       routes: <RouteBase>[
         homaPage,
         loginPage,
+        registrationPage,
       ],
     ),
   ],
@@ -41,7 +50,8 @@ class AppRoutes {
 
 
 class AppRoutesConst {
+  static const SPLASH = '/';
   static const HOME = 'home_page';
   static const LOGIN  = 'login_page';
-  static const SPLASH = '/';
+  static const REGISTRATION  = 'registration_page';
 }

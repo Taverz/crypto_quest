@@ -12,10 +12,14 @@ class AuthService{
   String login = '';
   String password = '';
   
+  String name = '';
+  bool male = false;
+  int age = 18; 
+
 
   Future<bool> logined(
     // {required SelectTypeAuth type, required LoginKeyData loginData}
-    Function success, Function errore
+    Function success, Function errore,
   ) async {
     //TODO: validate
     /// Validate
@@ -27,7 +31,7 @@ class AuthService{
     var loginData =  LoginEmail(email: login, passsword: password);
     if(loginData is LoginEmail){
       try{
-      bool? result = await  RepositoryHuaweiAuthService.loginEmail(loginData);
+      bool? result = await  RepositoryHuaweiAuthService.loginEmailWW(loginData);
       if(result !=null){
         if(result == true){
           success();
@@ -46,17 +50,18 @@ class AuthService{
     }
     return false;
   }
-  Future<bool> registration({required SelectTypeAuth type, required RegistrationData registData})async{
+  Future<bool> registration(Function success, Function errore,)async{
     var regExp_Email = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(login);
     var regExp_Password = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$').hasMatch(password);
     if(regExp_Email && regExp_Password){}else{
       return false;
     }
+    final registData = RegistrationEmail(name: name, male: male, age: age, email: login, passsword: password);
     if(registData is RegistrationEmail){
       //TODO: validate
       /// Validate
       if(true){
-       bool? result = await  RepositoryHuaweiAuthService.registrationEmail(registData);
+       bool? result = await  RepositoryHuaweiAuthService.registrationEmailWW(registData);
       }else{
         //TODO:
       }
@@ -73,10 +78,10 @@ class AuthService{
 
 //TODO: Mock data
 class RepositoryHuaweiAuthService{
-  static loginEmail(LoginEmail loginData)async{
+  static loginEmailWW(LoginEmail loginData)async{
     bool? result = await HuaweiAuthService.loginEmail(loginData);
   }
-  static registrationEmail(RegistrationEmail dataRegistration)async{
+  static registrationEmailWW(RegistrationEmail dataRegistration)async{
     bool? result = await HuaweiAuthService.registrationEmail(dataRegistration);
   }
 }
@@ -118,7 +123,7 @@ class HuaweiAuthService {
 
     VerifyCodeSettings settings = VerifyCodeSettings(VerifyCodeAction.registerLogin, sendInterval: 30);
     VerifyCodeResult? resultVerifyCode = await EmailAuthProvider.requestVerifyCode(email,settings);
-
+    
     EmailUser user = EmailUser(email, resultVerifyCode!.shortestInterval!, password:'nikita123');
     StreamController<AGCUser?> _streamContr = StreamController();
     StreamController<String?> _streamContrErrore = StreamController();
@@ -133,7 +138,7 @@ class HuaweiAuthService {
           //fail
             _streamContr.add(null);
             _streamContrErrore.add(error.toString());
-          print("Errrore REGISTR "+error);
+          print("Errrore REGISTR "+error.toString());
         });
     AGCUser? data = await _streamContr.stream.last;
     String? erore = await _streamContrErrore.stream.last;

@@ -30,7 +30,7 @@ class SplashScreen extends HookConsumerWidget  {
     final SplashScreenProvider  watchVal = ref.watch(providerSplashScreen);
     watchVal.loaded((successLoad){
       if(successLoad){
-        context.go(AppRoutesConst.SPLASH+ AppRoutesConst.LOGIN);  
+        context.go(AppRoutesConst.SPLASH+ AppRoutesConst.REGISTRATION);  
       }
     });
     return Scaffold(

@@ -1,8 +1,11 @@
+import 'package:agconnect_auth/agconnect_auth.dart';
 import 'package:crypto_quest/other/route_app.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() {
+
+  //TODO: dialog service 
   runApp(ProviderScope(child: const MyApp()));
 }
 
