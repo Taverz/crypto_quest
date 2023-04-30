@@ -1,10 +1,10 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../other/route_app.dart';
 
 final providerSplashScreen = Provider((ref) => SplashScreenProvider());
 
@@ -29,8 +29,9 @@ class SplashScreen extends HookConsumerWidget  {
   Widget build(BuildContext context, WidgetRef ref) {
     final SplashScreenProvider  watchVal = ref.watch(providerSplashScreen);
     watchVal.loaded((successLoad){
-      if(successLoad)
-      context.go('/login_page');
+      if(successLoad){
+        context.go(AppRoutesConst.SPLASH+ AppRoutesConst.LOGIN);  
+      }
     });
     return Scaffold(
       body: SafeArea(child: Container(child: const Center(child: Text(TTILE_SPLASHSCREEN),),),),

@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-
 //TODO: Api and other logic
 
 import 'dart:async';
@@ -16,6 +15,7 @@ class AuthService{
 
   Future<bool> logined(
     // {required SelectTypeAuth type, required LoginKeyData loginData}
+    Function success, Function errore
   ) async {
     //TODO: validate
     /// Validate
@@ -26,7 +26,20 @@ class AuthService{
     }
     var loginData =  LoginEmail(email: login, passsword: password);
     if(loginData is LoginEmail){
+      try{
       bool? result = await  RepositoryHuaweiAuthService.loginEmail(loginData);
+      if(result !=null){
+        if(result == true){
+          success();
+        }else{
+          errore();
+        }
+      }else{
+        errore();
+      }
+      }catch(e){
+        errore();
+      }
     }else{
       //TODO:
       return false;

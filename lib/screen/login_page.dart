@@ -1,10 +1,11 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../other/route_app.dart';
 import '../service/authorization_service.dart';
 import '../service/nertwork_service.dart';
 
@@ -16,25 +17,35 @@ class LoginPageW extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var sizeV =const SizedBox(height: 15,);
     listenerConnectSnackbar(context, ref);
-    return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-        Container(
-          child: const Text(""),
+    return Scaffold(
+      body: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+          Container(
+            child: const Text(""),
+          ),
+          TextFieldCustomW("Login", (data){
+            ref.watch(loginPageProv).login = data;
+          },
+          ),
+          sizeV,
+           TextFieldCustomW("Password", (data){
+            ref.watch(loginPageProv).password = data;
+          },
+          ),
+          sizeV,
+          _buttonConfirm(
+            (){ref.watch(loginPageProv).logined((){
+              context.go(AppRoutesConst.SPLASH+ AppRoutesConst.LOGIN);
+            },
+            (){
+
+            },
+            );},
+          ), 
+        ],
         ),
-        TextFieldCustomW("Login", (data){
-          ref.watch(loginPageProv).login = data;
-        },
-        ),
-        sizeV,
-         TextFieldCustomW("Password", (data){
-          ref.watch(loginPageProv).password = data;
-        },
-        ),
-        sizeV,
-        _buttonConfirm((){ref.watch(loginPageProv).logined();}),
-      ],
       ),
     );
   }

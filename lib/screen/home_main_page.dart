@@ -2,7 +2,6 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../service/nertwork_service.dart';
@@ -11,12 +10,14 @@ class HomePageMain extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     listenerConnectSnackbar(context, ref);
-    return  Column(
-        children: [
-          _appBar(),
-          _content(),
-        ],
-      );
+    return  Scaffold(
+      body: Column(
+          children: [
+            _appBar(),
+            _content(),
+          ],
+        ),
+    );
   }
 
   Widget _appBar(){

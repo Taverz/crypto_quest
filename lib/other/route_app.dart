@@ -8,14 +8,14 @@ import '../screen/splash_screen.dart';
 
 class AppRoutes {
   static final homaPage =  GoRoute(
-    path: '/home_page',
+    path: AppRoutesConst.HOME,
     builder: (BuildContext context, GoRouterState state) {
       return HomePageMain();
     },
   );
 
   static final loginPage =  GoRoute(
-    path: '/login_page',
+    path: AppRoutesConst.LOGIN,
     builder: (BuildContext context, GoRouterState state) {
       return LoginPageW();
     },
@@ -24,7 +24,7 @@ class AppRoutes {
   static final GoRouter routerSettigs = GoRouter(
   routes: <RouteBase>[
     GoRoute(
-      path: '/splash',
+      path: AppRoutesConst.SPLASH,
       builder: (BuildContext context, GoRouterState state) {
         return  SplashScreen();
       },
@@ -41,7 +41,7 @@ class AppRoutes {
 
 
 class AppRoutesConst {
-  static const HOME = '/home_page';
-  static const LOGIN  = '/login_page';
-  static const SPLASH = '/splash';
+  static const HOME = 'home_page';
+  static const LOGIN  = 'login_page';
+  static const SPLASH = '/';
 }
