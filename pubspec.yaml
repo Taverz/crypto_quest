@@ -54,8 +54,9 @@ dependencies:
   get_it: ^7.3.0
   get: ^4.6.5
   ## other dependencies here
-  inject:
-    path: ./vendor/inject.dart/package/inject
+  # inject:
+  #   path: ./vendor/inject.dart/package/inject
+  agconnect_auth: ^1.6.0+300
 
 dev_dependencies:
   flutter_test:
@@ -66,8 +67,8 @@ dev_dependencies:
   build_runner: ^2.3.3
 
   ## TEST library
-  inject_generator:
-    path: ./vendor/inject.dart/package/inject_generator
+  # inject_generator:
+  #   path: ./vendor/inject.dart/package/inject_generator
 
 
 flutter:

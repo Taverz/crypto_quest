@@ -19,7 +19,12 @@ class SplashScreenProvider {
   }
 }
 
+
+
 class SplashScreen extends HookConsumerWidget  {
+
+  static const TTILE_SPLASHSCREEN = 'SplashScreen';
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final SplashScreenProvider  watchVal = ref.watch(providerSplashScreen);
@@ -28,7 +33,7 @@ class SplashScreen extends HookConsumerWidget  {
       context.go('/login_page');
     });
     return Scaffold(
-      body: SafeArea(child: Container(child: const Center(child: Text("SplashScreen"),),),),
+      body: SafeArea(child: Container(child: const Center(child: Text(TTILE_SPLASHSCREEN),),),),
     );
   }
 }

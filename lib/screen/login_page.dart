@@ -5,18 +5,11 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../service/authorization_service.dart';
 import '../service/nertwork_service.dart';
 
-final loginPageProv = Provider((ref) => LoginPageProvider());
+final loginPageProv = Provider((ref) => AuthService());
 
-class LoginPageProvider  {
-  String? login;
-  String? password;
-  auth(){
-    //TODO: validation
-    
-  }
-}
 
 class LoginPageW extends HookConsumerWidget {
   @override
@@ -27,6 +20,9 @@ class LoginPageW extends HookConsumerWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+        Container(
+          child: const Text(""),
+        ),
         TextFieldCustomW("Login", (data){
           ref.watch(loginPageProv).login = data;
         },
@@ -37,7 +33,7 @@ class LoginPageW extends HookConsumerWidget {
         },
         ),
         sizeV,
-        _buttonConfirm((){ref.watch(loginPageProv).auth();}),
+        _buttonConfirm((){ref.watch(loginPageProv).logined();}),
       ],
       ),
     );
