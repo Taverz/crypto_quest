@@ -9,12 +9,14 @@ import 'package:agconnect_auth/agconnect_auth.dart';
 
 class AuthService{
 
-  String login = '';
-  String password = '';
+  String login = 'test@tst.com';
+  String password = '123A@qwert'; // минимум 8 символов
   
-  String name = '';
+  String name = 'TEST1';
   bool male = false;
   int age = 18; 
+
+  String werifyCode = '';
 
 
   Future<bool> logined(
@@ -31,16 +33,12 @@ class AuthService{
     var loginData =  LoginEmail(email: login, passsword: password);
     if(loginData is LoginEmail){
       try{
-      bool? result = await  RepositoryHuaweiAuthService.loginEmailWW(loginData);
-      if(result !=null){
+        bool result = await  RepositoryHuaweiAuthService.loginEmailWW(loginData) ;
         if(result == true){
           success();
         }else{
           errore();
         }
-      }else{
-        errore();
-      }
       }catch(e){
         errore();
       }
@@ -50,6 +48,8 @@ class AuthService{
     }
     return false;
   }
+
+
   Future<bool> registration(Function success, Function errore,)async{
     var regExp_Email = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(login);
     var regExp_Password = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$').hasMatch(password);
@@ -61,7 +61,38 @@ class AuthService{
       //TODO: validate
       /// Validate
       if(true){
-       bool? result = await  RepositoryHuaweiAuthService.registrationEmailWW(registData);
+        bool result = await  RepositoryHuaweiAuthService.registrationEmailWW(registData);
+        if(result){
+          success();
+        }else{
+          errore();
+        }
+      }else{
+        //TODO:
+      }
+    }else{
+      //TODO:
+    }
+    return false;
+  }
+
+  Future<bool> confirmEmail({required Function success, required Function errore})async{
+    // var regExp_Email = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(login);
+    // var regExp_Password = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$').hasMatch(password);
+    // if(regExp_Email && regExp_Password){}else{
+    //   return false;
+    // }
+    // final registData = RegistrationEmail(name: name, male: male, age: age, email: login, passsword: password);
+    if(werifyCode is String){
+      //TODO: validate
+      /// Validate
+      if(true){
+       bool result = await  RepositoryHuaweiAuthService.confirmEmail(werifyCode);
+       if(result){
+        success();
+       }else{
+        errore();
+       }
       }else{
         //TODO:
       }
@@ -78,17 +109,23 @@ class AuthService{
 
 //TODO: Mock data
 class RepositoryHuaweiAuthService{
-  static loginEmailWW(LoginEmail loginData)async{
-    bool? result = await HuaweiAuthService.loginEmail(loginData);
+  static Future<bool> loginEmailWW(LoginEmail loginData)async{
+    bool result = await HuaweiAuthService.loginEmail(loginData);
+    return result;
   }
-  static registrationEmailWW(RegistrationEmail dataRegistration)async{
-    bool? result = await HuaweiAuthService.registrationEmail(dataRegistration);
+  static Future<bool> registrationEmailWW(RegistrationEmail dataRegistration)async{
+    bool? result = await HuaweiAuthService.requirestConfirmEmail(dataRegistration);
+    return result;
+  }
+  static Future<bool> confirmEmail(String code)async{
+    bool? result = await HuaweiAuthService.registrationEmail_verify(code);
+    return result ?? false;
   }
 }
 
 class HuaweiAuthService {
   static Future<bool> loginEmail(LoginEmail loginData)async{
-    AGCAuthCredential credential = EmailAuthProvider.credentialWithPassword('k4fos568rhvx7ua@gmail.com', 'nikita123');
+    AGCAuthCredential credential = EmailAuthProvider.credentialWithPassword('k4fos568rhvx7ua@gmail.com', '123A@qwert');
       StreamController<AGCUser?> _streamContr = StreamController();
       StreamController<String?> _streamContrErrore = StreamController();
       AGCAuth.instance.signIn(credential)
@@ -118,40 +155,56 @@ class HuaweiAuthService {
       return false;
     }
   }
-  static registrationEmail(RegistrationEmail dataRegistration)async{
-    String email = "k4fos568rhvx7ua@gmail.com";
 
-    VerifyCodeSettings settings = VerifyCodeSettings(VerifyCodeAction.registerLogin, sendInterval: 30);
-    VerifyCodeResult? resultVerifyCode = await EmailAuthProvider.requestVerifyCode(email,settings);
+  /// ## Register after confirm email
+  /// ### Parametr
+  /// * this veryfiCode
+  /// * this email
+  /// * this password
+  /// ### Result
+  /// * this AGCUser? data
+  static registrationEmail_verify(String veryfiCode)async{
+    String email = "viskochka77@gmail.com";
+
+    // VerifyCodeSettings settings = VerifyCodeSettings(VerifyCodeAction.registerLogin, sendInterval: 30);
+    // VerifyCodeResult? resultVerifyCode = await EmailAuthProvider.requestVerifyCode(email,settings);
     
-    EmailUser user = EmailUser(email, resultVerifyCode!.shortestInterval!, password:'nikita123');
+    EmailUser user = EmailUser(email, veryfiCode, password:'123A@qwert');
     StreamController<AGCUser?> _streamContr = StreamController();
-    StreamController<String?> _streamContrErrore = StreamController();
-    AGCAuth.instance.createEmailUser(user)
-        .then((signInResult) async{
-          // success
-          AGCUser? currentUser =await AGCAuth.instance.currentUser;
-          _streamContr.add(currentUser);
-          _streamContrErrore.add(null);
-        })
-        .catchError((error) {
-          //fail
-            _streamContr.add(null);
-            _streamContrErrore.add(error.toString());
-          print("Errrore REGISTR "+error.toString());
-        });
-    AGCUser? data = await _streamContr.stream.last;
-    String? erore = await _streamContrErrore.stream.last;
+    // StreamController<String?> _streamContrErrore = StreamController();
+    SignInResult signInUser = await AGCAuth.instance.createEmailUser(user);
+    AGCUser? currentUser =await AGCAuth.instance.currentUser;
+    //     .then((signInResult) async{
+    //       // success
+    //       AGCUser? currentUser =await AGCAuth.instance.currentUser;
+    //       _streamContr.add(currentUser);
+    //       _streamContrErrore.add(null);
+    //     })
+    //     .catchError((error) {
+    //       //fail
+    //         _streamContr.add(null);
+    //         _streamContrErrore.add(error.toString());
+    //       print("Errrore REGISTR "+error.toString());
+    //     });
+    // AGCUser? data = await _streamContr.stream.last;
+    // String? erore = await _streamContrErrore.stream.last;
     
-    if(erore != null){
-      return false;
-    }
-    if(data != null){
+    // if(erore != null){
+    //   return false;
+    // }
+    if(signInUser.user!=null){
       return true;
     }else{
       return false;
     }
+  }
 
+  static Future<bool> requirestConfirmEmail(RegistrationEmail dataRegistration)async{
+     String email = "viskochka77@gmail.com";
+
+    VerifyCodeSettings settings = VerifyCodeSettings(VerifyCodeAction.registerLogin, sendInterval: 30);
+    VerifyCodeResult? resultVerifyCode = await EmailAuthProvider.requestVerifyCode(email,settings);
+    return resultVerifyCode != null;
   }
 }
 

@@ -25,35 +25,60 @@ class RegistrationPageW extends HookConsumerWidget {
           Container(
             child: const Text(""),
           ),
-          TextFieldCustomW("Login", (data){
+          TextFieldCustomW(ref.watch(loginPageProv).login ,"Login", (data){
             ref.watch(loginPageProv).login = data;
           },
           ),
           sizeV,
-           TextFieldCustomW("Password", (data){
+           TextFieldCustomW(ref.watch(loginPageProv).password ,"Password", (data){
             ref.watch(loginPageProv).password = data;
           },
           ),
-          TextFieldCustomW("name", (data){
+          TextFieldCustomW(ref.watch(loginPageProv).name ,"name", (data){
             ref.watch(loginPageProv).name = data;
           },
           ),
           Switch(value:ref.watch(loginPageProv).male , onChanged: (val){ref.watch(loginPageProv).male = val;}),
-          TextFieldCustomW("age", (data){
+          TextFieldCustomW(ref.watch(loginPageProv).age.toString()  ,"age", (data){
             ref.watch(loginPageProv).age = int.parse(data.isEmpty?"0":data);
           },
           ),
           sizeV,
+          //TODO: если письмо не видно провертье в Спам, возможно оно  случано упало туда
           _buttonConfirm(
-            (){ref.watch(loginPageProv).registration(
-              (){
-              context.go(AppRoutesConst.SPLASH+ AppRoutesConst.LOGIN);
-            },
             (){
-
+              //TODO: interval send
+                  ref.watch(loginPageProv).registration(
+                    (){
+                    print('SUCCESS REQ CONFIRM WERTEGO');
+                    // context.go(AppRoutesConst.SPLASH+ AppRoutesConst.LOGIN);
+                  },
+                  (){
+                      //TODO: Dialog errore
+                  },
+                  );
+                  //TODO: bloc butonn start timer from 
             },
-            );},
           ), 
+          SizedBox(height: 40,),
+
+          TextFieldCustomW(ref.watch(loginPageProv).werifyCode ,"name", (data){
+            ref.watch(loginPageProv).werifyCode = data;
+          },
+          ),
+          _buttonConfirm(
+            (){
+                ref.watch(loginPageProv).confirmEmail(
+                  success:(){
+                    print('SUCCESS REGISTRATION WERTEGO');
+                  // context.go(AppRoutesConst.SPLASH+ AppRoutesConst.LOGIN);
+                },
+                errore:(){
+
+                },
+                );
+            },
+          ),
         ],
         ),
       ),
@@ -76,11 +101,12 @@ class RegistrationPageW extends HookConsumerWidget {
 
 class TextFieldCustomW extends  HookConsumerWidget{
   final String hint;
+  final String initControllerText;
   final Function(String) writetext;
-  const TextFieldCustomW(this.hint, this.writetext);
+  const TextFieldCustomW(this.initControllerText, this.hint, this.writetext);
    @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = useTextEditingController();
+    final controller = useTextEditingController(text:initControllerText);
     controller.addListener(() {
       writetext(controller.text);
     });
