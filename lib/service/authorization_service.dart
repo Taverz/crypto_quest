@@ -7,10 +7,14 @@ import 'dart:convert';
 
 import 'package:agconnect_auth/agconnect_auth.dart';
 
+import '../other/validation/validor_builder.dart';
+
 class AuthService{
 
   String login = 'test@tst.com';
   String password = '123A@qwert'; // минимум 8 символов
+  /// Only registration
+  String confirmPassword = '123A@qwert'; // минимум 8 символов
   
   String name = 'TEST1';
   bool male = false;
@@ -19,15 +23,39 @@ class AuthService{
   String werifyCode = '';
 
 
+
+  Validation validateInit(){
+   Validation validation =  makeSignUpValidation();
+   return validation;
+  }
+
+  ValidationException? _validateFiled(String field){
+    final Map formData = {
+      'name': name,
+      'email': login,
+      'password': password,
+      'passwordConfirmation': confirmPassword
+    };
+    final ValidationException? erroreOrSuccess = validateInit().validate(field: field, input: formData);
+    return erroreOrSuccess;
+  }
+
+
+
   Future<bool> logined(
     // {required SelectTypeAuth type, required LoginKeyData loginData}
     Function success, Function errore,
   ) async {
     //TODO: validate
     /// Validate
-    var regExp_Email = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(login);
-    var regExp_Password = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$').hasMatch(password);
-    if(regExp_Email && regExp_Password){}else{
+    // var regExp_Email = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(login);
+    // var regExp_Password = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$').hasMatch(password);
+    // if(regExp_Email && regExp_Password){}else{
+    //   return false;
+    // }
+    final valideEmail = _validateFiled(login);
+    final validePassword = _validateFiled(password);
+    if(valideEmail != null && validePassword != null){
       return false;
     }
     var loginData =  LoginEmail(email: login, passsword: password);
@@ -514,3 +542,206 @@ class RegistrationEmail extends RegistrationData implements LoginEmail, Registra
 // Рвзное подтверждение
 
 // -----
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////// -------------------------------------------
+///
+///
+///
+///
+///
+///
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/// ПРИМЕР 
+
+
+// abstract class IAuthFacade {
+//   Future<void> signIn({required String email, required String password,});
+//   Future<void> register({required String username, required String email, required String password});
+//   Future<User?> getUser();
+//   Future<void> logOut();
+// }
+
+
+// @Injectable(as: IAuthFacade)
+// class AuthFacade implements IAuthFacade {
+//   @override
+//   Future<User?> getUser() {
+//     // TODO: implement getUser
+//     throw UnimplementedError();
+//   }
+
+//   @override
+//   Future<void> register({required String username, required String email, required String password}) {
+//     // TODO: implement register
+//     throw UnimplementedError();
+//   }
+
+//   @override
+//   Future<void> signIn({required String email, required String password}) {
+//     // TODO: implement signIn
+//     throw UnimplementedError();
+//   }
+// }
+
+
+// @JsonSerializable()
+// class User extends Equatable {
+//   String id;
+//   final String email;
+//   final String username;
+
+//   User({required this.id, required this.email, required this.username});
+
+//   @override
+//   List<Object?> get props => [this.id, this.email, this.username];
+
+//   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+
+//   Map<String, dynamic> toJson() => _$UserToJson(this);
+// }
+
+
+// @module
+// abstract class AppModule {
+//   // ....
+//   @injectable
+//   FirebaseFirestore get store => FirebaseFirestore.instance;
+
+//   @injectable
+//   FirebaseAuth get auth => FirebaseAuth.instance;
+// }
+
+
+
+
+// @Injectable(as: IAuthFacade)
+// class AuthFacade implements IAuthFacade {
+//   final FirebaseAuth _firebaseAuth;
+//   final FirebaseFirestore _firebaseFirestore;
+
+//   AuthFacade(this._firebaseAuth, this._firebaseFirestore);
+
+//   // ...Implementation..
+// }
+
+
+// @Injectable(as: IAuthFacade)
+// class AuthFacade implements IAuthFacade {
+//   final FirebaseAuth _firebaseAuth;
+//   final FirebaseFirestore _firebaseFirestore;
+
+//   AuthFacade(this._firebaseAuth, this._firebaseFirestore);
+
+//   @override
+//   Future<u.User?> getUser() async {
+//     try {
+//       final uid = _firebaseAuth.currentUser!.uid;
+//       final currentUser = await _firebaseFirestore.doc("users/$uid").snapshots().first;
+//       return currentUser.toUser();
+//     } on FirebaseAuthException catch(e) {
+//       print("We failed ${e.message}");
+//     }
+//   }
+
+//   @override
+//   Future<void> register({required String username, required String email, required String password}) {
+//       return _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password)
+//           .then((value) async {
+//             return _firebaseFirestore.doc("users/${value.user!.uid}")
+//         .set({"email": email, "username": username});
+//       });
+//   }
+
+//   @override
+//   Future<void> signIn({required String email, required String password}) {
+//     return _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+//   }
+
+//   @override
+//   Future<void> logOut() => _firebaseAuth.signOut();
+// }
+
+// // Simple extension to convert firestore document snapshots to our class
+// extension DocumentSnapX on DocumentSnapshot<Map<String, dynamic>> {
+//   u.User toUser() {
+//     return u.User.fromJson(this.data()!)
+//         ..id = this.id;
+//   }
+// }
+
+
+
+// @injectable
+// class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
+//   final IAuthFacade authFacade;
+
+//   LoginFormBloc(this.authFacade) : super(LoginFormInitial()) {
+//       // Update login state according to events
+//       on<LoginButtonPressed>((event, emit) async {
+//       final currentState = state as LoginFormState;
+//         final data = authFacade.signIn(currentState.email, currentState.password);
+//       })
+//     }
+//   }
+
